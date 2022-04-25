@@ -1,4 +1,4 @@
-
+//tim: O(nlogn + n), space : 0(1)
 class Solution
 {
     bool static cmp(Item a, Item b){
