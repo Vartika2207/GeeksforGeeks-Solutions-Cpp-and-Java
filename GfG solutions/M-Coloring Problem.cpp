@@ -1,3 +1,5 @@
+
+//time: O(n^m); space: O(2n)
 bool isPossible(bool graph[101][101], int n, int curr, int color[], int pickedColor){
         for(int i=0; i<n; i++){
             if(curr != i and graph[curr][i] and color[i] == pickedColor)
