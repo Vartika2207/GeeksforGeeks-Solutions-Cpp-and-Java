@@ -1,7 +1,7 @@
 
 class Solution{
     //time: O(4^(n*n)) -->on each cell we try 4 possibilites
-   
+   //space: O(n*n)
     string dir = "DLRU";
     int dxdy[4][2] = {{1, 0}, {0, -1}, {0, 1}, {-1, 0}};
     
