@@ -1,4 +1,5 @@
 
+//APPROACH-1
 class Solution{
     //time: O(4^(n*n)) -->on each cell we try 4 possibilites
    //space: O(n*n)
@@ -31,8 +32,6 @@ class Solution{
         visited[x][y] = 0;
     }
     
-    
-    
     public:
     vector<string> findPath(vector<vector<int>> &m, int n) {
         vector<string> paths;
@@ -50,4 +49,50 @@ class Solution{
     }
 };
 
- 
+ /*----------------------------------------*/
+//APPROACH-2
+class Solution{
+    //time: O(4^(n*n)) -->on each cell we try 4 possibilites
+   // space: O(1)
+    string dir = "DLRU";
+    int dxdy[4][2] = {{1, 0}, {0, -1}, {0, 1}, {-1, 0}};
+    
+    bool isValid(int x, int y,int n){
+        if((x < n && x >= 0) && (y < n && y >= 0))
+          return true;
+         return false;
+    }
+    
+    void findPathHelper(vector<vector<int>>&m, int n, vector<string> &paths, string path, int x, int y){
+        if(x == n-1 && y == n-1){
+            paths.push_back(path);
+            return;
+        }
+        
+        m[x][y] = 0; //since rat  visited then block that cell
+        for(int i=0; i<4; i++){
+            int dx = x + dxdy[i][0];
+            int dy = y + dxdy[i][1];
+            char direction = dir[i];
+            if(isValid(dx, dy, n) && m[dx][dy]){
+                path.push_back(direction);
+                findPathHelper(m, n, paths, path, dx, dy);
+                path.pop_back();
+            }
+        }
+        m[x][y] = 1; //unblock cell
+    }
+    
+    public:
+    vector<string> findPath(vector<vector<int>> &m, int n) {
+        vector<string> paths;
+        string path = "";
+        if(n == 0 || n == 1 || m[0][0] == 0 || m[n-1][n-1] == 0)
+        return paths;
+      
+        findPathHelper(m, n, paths, path, 0, 0);
+        return paths;
+    }
+};
+
+    
